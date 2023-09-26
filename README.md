@@ -1,9 +1,9 @@
-## Loja de Joias
+# Loja de Joias
 
-# Status
+## Status
 Em desenvolvimento
 
-# Tecnologias
+## Tecnologias
 HTML
 CSS
 JAVASCRIPT
@@ -11,13 +11,13 @@ JAVA
 MYSQL
 JUNIT
 
-# Time de desenvolvedores
+## Time de desenvolvedores
 Cristyan de Souza
 
-# Objetivo
+## Objetivo
 Loja virtual para automatizar processos feitos manuais
 
-# Requisitos do sistema
+## Requisitos do sistema
 
 Requisitos funcionais
 
