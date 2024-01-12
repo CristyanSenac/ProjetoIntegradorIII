@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senac</title>
+  <link rel="stylesheet" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" th:href="@{/css/products.css}" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex justify-content-end align-items-center">
+  <div th:replace="nav-menu :: nav"></div>
+  <div id="main-content" class="d-flex justify-content-start flex-column gap-5">
+    <h1>Produtos</h1>
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#createProductModal">
+      Criar Novo Produto
+    </button>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Descricao</th>
+          <th scope="col">Estoque</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Remover</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product : ${productList}" th:attr="id='row-' + ${product.id}">
+          <th scope="row" th:text="${product.id}"></th>
+          <td th:text="${product.name}"></td>
+          <td th:text="${product.description}"></td>
+          <td>
+            <span th:text="${product.inventory}" th:attr="id='inventory-' + ${product.id}"></span>
+            <button th:onclick="'updateInventory(' + ${product.id} + ', \'increase\', ' + ${product.inventory} + ')'"
+              class="management-button">▲</button>
+            <button th:onclick="'updateInventory(' + ${product.id} + ', \'decrease\', ' + ${product.inventory} + ')'"
+              class="management-button">▼</button>
+
+          </td>
+          <td th:text="${product.price}"></td>
+          <td th:text="${product.typeName}"></td>
+          <td>
+            <button th:onclick="'deleteProduct(' + ${product.id} + ')'" style="color: red;"
+              class="management-button">X</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="modal fade" id="createProductModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Novo Produto</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="createProductForm">
+              <div class="form-group">
+                <label for="productName">Nome:</label>
+                <input type="text" class="form-control" id="productName" name="productName" required>
+              </div>
+              <div class="form-group">
+                <label for="productDescription">Descricao:</label>
+                <textarea class="form-control" id="productDescription" name="productDescription" required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="productInventory">Estoque:</label>
+                <input type="number" class="form-control" id="productInventory" name="productInventory" required>
+              </div>
+              <div class="form-group">
+                <label for="productPrice">Valor:</label>
+                <input type="number" class="form-control" id="productPrice" name="productPrice" step="0.01" required>
+              </div>
+              <div class="form-group">
+                <label for="productType">Tipo:</label>
+                <select class="form-control" id="productType" name="productType" required>
+                  <option value="1">Anel</option>
+                  <option value="2">Brinco</option>
+                  <option value="3">Pulseira</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/manage.js}"></script>
+
+</html>
