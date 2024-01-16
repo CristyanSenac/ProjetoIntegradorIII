@@ -28,7 +28,7 @@ public class ProductView {
     @GetMapping
     public String getMainView(HttpServletRequest request, HttpServletResponse response, Model model) {
         UserDto user = userService.validateUserAuthenticated(request, model);
-        if(user == null)
+        if(user == null  || !user.getTypeId().equals(2L))
             return "login";
         List<Product> productList = controllerRest.getProducts(request, response, model);
         model.addAttribute("productList", productList);

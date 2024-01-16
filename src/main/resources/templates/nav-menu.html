@@ -1,6 +1,6 @@
 <nav class="nav flex-column" id="nav-menu">
     <a class="nav-link menu-item" href="/home">Início</a>
-    <a class="nav-link menu-item" onclick="getProducts()">Produtos</a>
+    <a class="nav-link menu-item" onclick="getProducts()" th:if="${user.typeId eq 2}">Produtos</a>
     <a class="nav-link menu-item" onclick="getSales()" th:if="${user.typeId eq 1}">Relatório de vendas</a>
     <a class="nav-link menu-item" onclick="getManageProducts()" th:if="${user.typeId eq 1}">Gerenciar produtos</a>
     <a class="nav-link menu-item"  onclick="getMySales()" th:if="${user.typeId eq 2}">Minhas compras</a>

@@ -1,15 +1,13 @@
 function updateInventory(productId, action, actual) {
     let url = 'http://localhost:8080/product/updateinventory/' + productId + '?action=' + action;
-
     sendRequest('PUT', url, null, () => updateInventoryTemp(productId, action, actual), () => showMessage("Ops, algo deu errado. Favor entrar em contato com o suporte!", false));
 }
 
 function updateInventoryTemp(productId, action, actual){
     var newInventoryValue;
-
     if (action === 'increase') {
         newInventoryValue = actual + 1;
-    } else if (action === 'decrease' && currentInventory > 0) {
+    } else if (action === 'decrease' && actual > 0) {
         newInventoryValue = actual - 1;
     } else {
         newInventoryValue = actual;
@@ -25,7 +23,6 @@ function deleteProduct(productId) {
 }
 
 function removeProductRow(productId) {
-    console.log("Entrando na remoção")
     $('#row-' + productId).remove();
 }
 
