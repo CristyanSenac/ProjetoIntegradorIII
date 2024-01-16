@@ -36,7 +36,7 @@ function getProducts() {
 }
 function getSales() {
     let url = 'http://localhost:8080/sales'
-
+    console.log(url)
     sendRequest('GET', url, null, () => window.location.href='http://localhost:8080/sales', null);
 }
 function getManageProducts() {

@@ -13,7 +13,7 @@ $(document).ready(() => {
 
         let url = 'http://localhost:8080/signin'
 
-        sendRequest('POST', url, data, () => window.location.href='http://localhost:8080/home', null);
+        sendRequest('POST', url, data, () => window.location.href='http://localhost:8080/home', () => showMessage("Dados de login inválidos", false));
     })
 })
 

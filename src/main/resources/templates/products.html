@@ -30,21 +30,19 @@
             </div>
         </div>
         <div class="container products-container">
-                <div class="row justify-content-center">
-                    <div class="col-3 border m-3 colum-product" th:each="product : ${productList}">
-                        <div class="text-center">
-                            <h5 class="card-title mt-3" th:text="${product.name}"></h5>
-                            <p class="d-none product-id" th:text="${product.id}"></p>
-                        </div>
-                        <div class="text-center">
-                            <img src="#" class="img-fluid" alt="Imagem do Produto">
-                        </div>
-                        <p class="card-text mt-3" th:text="${product.description}"></p>
-                        <div class="text-center mb-3">
-                            <a onclick="sale(this)" class="btn btn-outline-warning">Solicitar Compra</a>
-                        </div>
+            <div class="row justify-content-center">
+                <div class="col-3 border m-3 colum-product" th:each="product : ${productList}">
+                    <div class="text-center">
+                        <h5 class="card-title mt-3" th:text="${product.name}"></h5>
+                        <p class="product-price" th:text="'R$ ' + ${product.price}"></p>
+                        <p class="d-none product-id" th:text="${product.id}"></p>
+                    </div>
+                    <div class="text-center">
+                        <img th:src="@{'/assets/' + ${product.urlImage}}" class="img-fluid" alt="Imagem do Produto">                        
+                        <a th:onclick="'sale(' + ${product.id} + ',' + ${user.id} + ')'" class="btn btn-outline-warning mt-2 mb-2">Solicitar Compra</a>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </body>

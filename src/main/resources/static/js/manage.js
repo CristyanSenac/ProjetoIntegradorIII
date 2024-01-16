@@ -1,19 +1,18 @@
 function updateInventory(productId, action, actual) {
-    let url = 'http://localhost:8080/product/updateinventory/' + productId + '?action=' + action + '&actual=' + actual;
+    let url = 'http://localhost:8080/product/updateinventory/' + productId + '?action=' + action;
 
-    sendRequest('PUT', url, null, () => updateInventoryTemp(productId, action), () => showMessage("Ops, algo deu errado. Favor entrar em contato com o suporte!", false));
+    sendRequest('PUT', url, null, () => updateInventoryTemp(productId, action, actual), () => showMessage("Ops, algo deu errado. Favor entrar em contato com o suporte!", false));
 }
 
-function updateInventoryTemp(productId,action){
-    var currentInventory = parseInt($('#inventory-' + productId).text());
+function updateInventoryTemp(productId, action, actual){
     var newInventoryValue;
 
     if (action === 'increase') {
-        newInventoryValue = currentInventory + 1;
+        newInventoryValue = actual + 1;
     } else if (action === 'decrease' && currentInventory > 0) {
-        newInventoryValue = currentInventory - 1;
+        newInventoryValue = actual - 1;
     } else {
-        newInventoryValue = currentInventory;
+        newInventoryValue = actual;
     }
 
     $('#inventory-' + productId).text(newInventoryValue);
@@ -22,7 +21,7 @@ function updateInventoryTemp(productId,action){
 function deleteProduct(productId) {
     let url = 'http://localhost:8080/product/delete/' + productId;
 
-    sendRequest('DELETE', url, null, () => removeProductRow(productId), null);
+    sendRequest('DELETE', url, null, () => removeProductRow(productId), () => showMessage("Erro ao deletar o produto", false));
 }
 
 function removeProductRow(productId) {

@@ -16,7 +16,7 @@ public class ProductDto {
     private String description;
     private int inventory;
     private Double price;
-    private Integer typeId;
+    private Long typeId;
 
 } 
     

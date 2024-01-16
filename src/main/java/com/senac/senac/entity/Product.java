@@ -3,6 +3,14 @@ package com.senac.senac.entity;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,31 +20,33 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-//Anotações JPA comentadas enquanto não há conexão com banco de dados
-//@Entity(name = "Product")
-//@Table(name = "product")
+@Entity(name = "Product")
+@Table(name = "product")
 public class Product {
 
-    //@Column
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String name;
+    @Column
     private String description;
     
-    //@ManyToOne
-    //@JoinColumn(name = "product_type_id")
+    @ManyToOne
+    @JoinColumn(name = "product_type_id")
     private ProductType type;
-    
+    @Column
     private BigDecimal price;
+    @Column
     private Integer inventory;
+    @Column
     private String urlImage;
+    @Column
+    private boolean removed;
+    
     private String typeName;
 
-    public Product(String name, String description){
-        this.name = name;
-        this.description = description;
-    }
     
     public void setTypeAndName(ProductType type){
         this.type = type;
